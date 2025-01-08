@@ -46,7 +46,7 @@ while nombreProducto != 'FIN':
     promedio_ofertas = suma_tiendas/cant_tiendas
     
     if promedio_ofertas > precio_normal:
-        precio_oferta = int(precio_normal*descuentoMinimo)
+        precio_oferta = int(precio_normal*(1-descuentoMinimo)) # para que me entregue el restante 
         descuento = descuentoMinimo*100
         print(f'PRECIO OFERTA SUGERIDO: $ {precio_oferta}')
         print(f'DESCUENTO: {descuento} %')
