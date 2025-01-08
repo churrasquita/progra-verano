@@ -2,7 +2,7 @@
 """
 Created on Tue Jan  7 21:14:53 2025
 
-@author: catal
+@author: catalina
 """
 contador_pedidos = 1 
 print('Bienvenido a la picada de Nokotan!')
@@ -13,6 +13,7 @@ mas_costoso = -11111
 valor_mascostoso = -111
 aplica_descuento = 0
 
+# contadores de cada plato para poder sacar el menor global
 cont_arroz= 0
 cont_sopa = 0
 cont_galletas= 0
