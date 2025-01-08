@@ -4,11 +4,10 @@ Created on Tue Jan  7 21:14:53 2025
 
 @author: catal
 """
-contador_pedidos = 1
+contador_pedidos = 1 
 print('Bienvenido a la picada de Nokotan!')
 
-
-procesar_pedidos = 'SI'
+procesar_pedidos = 'SI' 
 ganancias = 0
 mas_costoso = -11111
 valor_mascostoso = -111
@@ -20,7 +19,7 @@ cont_galletas= 0
 menor_global= 9999999
 plato_menos_pedido = ''
 
-while procesar_pedidos != 'NO':
+while procesar_pedidos != 'NO': # mientras el usuario no ingrese esta palabra
     print('     ')
     print(f'PEDIDO #{contador_pedidos}!')
     print('MENU DE LA PICADA')
@@ -41,7 +40,7 @@ while procesar_pedidos != 'NO':
             valor_pedido +=1500
             cont_sopa += 1
         
-        else:
+        else: # no necesita condición ya que es la única opción que queda
             valor_pedido += 1000
             cont_galletas += 1
         
@@ -49,7 +48,7 @@ while procesar_pedidos != 'NO':
     
     ganancias += valor_pedido
     print(f'Total del pedido: ${valor_pedido}')
-    procesar_pedidos = input('Desea seguir procesando pedidos: ').upper()
+    procesar_pedidos = input('Desea seguir procesando pedidos: ').upper() #sólo preguntamos una vez
     if procesar_pedidos == 'NUN!': 
         ganancias -= (valor_pedido*0.10)
         valor_pedido*=0.90
@@ -64,18 +63,17 @@ while procesar_pedidos != 'NO':
     
     contador_pedidos += 1 
     
+# sacar el menor pedido
 if cont_arroz < cont_sopa and cont_arroz < cont_galletas:
-    plato_menos_pedido = "ARROZ"
+    plato_menos_pedido = "Arroz"
     menor_global = cont_arroz
 elif cont_sopa< cont_arroz and cont_sopa<cont_galletas:
-    plato_menos_pedido = "SOPA"
+    plato_menos_pedido = "Sopa de Astas"
     menor_global = cont_sopa
 else:
-    plato_menos_pedido = "GALLETAS"
+    plato_menos_pedido = "Galletas Shika"
     menor_global = cont_galletas
 
-
-    
 print('     ')
 print('RESUMEN DEL DIA!')
 print(f'Pedidos realizados: {contador_pedidos-1}')
