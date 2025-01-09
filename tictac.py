@@ -1,91 +1,84 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jan  9 11:02:35 2025
+Created on Thu Jan  9 00:39:25 2025
 
-@author: LabCivil1-Pc34
+@author: bruno
 """
-despliegue = ''
 
-while despliegue != 'FIN':
-    print('-------Menú-------')
-    print('Elige un filtro o fin para terminar')
-    despliegue = input('(T) Tipo (S) Sumergible (FIN): ').upper()
-    while despliegue!= 'T' and despliegue!= 'S' and despliegue!= 'FIN':
-        despliegue = input('(T) Tipo (S) Sumergible (FIN): ').upper()
-    
-    if despliegue == 'T':
-        tipo = input('(A) Analógico (D) Digital (AD) Ambos: ').upper()
-        if tipo == 'A':
-            tipo = 'Analógico'
-        elif tipo == 'D':
-            tipo == 'Digital'
-        else:
-            tipo = 'Analógico/Digital'
-            
-           # RECIEN ABRIR EL ARCHIVO 
-        arch = open('relojes.txt', encoding= 'utf-8')
-        linea = arch.readline().strip()
-        while linea != '':
-            partes = linea.split(',')
-            idReloj= partes[0]
-            nombreReloj = partes[1]
-            precio = int(partes[2])
-            tipoReloj = partes[3]
-            
-            if tipoReloj == tipo: # para comprobar que sean del mismo tipo
-                print(idReloj,nombreReloj,precio)
-            linea = arch.readline().strip()
-            
-        numRelojCompra = int(input('Ingrese numero de reloj a comprar: '))
-        arch = open('relojes.txt', encoding= 'utf-8')
-        linea = arch.readline().strip()
-        while linea != '':
-            partes = linea.split(',')
-            idReloj= partes[0]
-            nombreReloj = partes[1]
-            precio = int(partes[2])
-            tipoReloj = partes[3]
-            if tipoReloj==tipo and numRelojCompra==idReloj:
-                print(f'COMPRADO {idReloj} {nombreReloj} {precio}')
-         
+print("-------Menú-------")
+print("Elige un filtro o fin para terminar")
+choice = input("(T) Tipo (S) Sumergible (FIN): ")
 
-    elif despliegue == 'S':
-        sumergible = input('(S) Sumergible (N) No Sumergible: ')
-        if sumergible == 'S':
-            sumergible == 'Sí'
-        else:
-            sumergible = 'No'
+total = 0 # para ir acumulando el total de los relojes
+
+while choice.upper() != "FIN":
+    while choice.upper()!="T" and choice.upper()!="S" and choice.upper()!="FIN":
+        choice = input("(T) Tipo (S) Sumergible (FIN): ")
+        if choice.upper()=="FIN":
+            break
+        
+    # UNA VEZ SELECCIONADA LA OPCION LEEMOS EL ARCHIVO, YA QUE ES LA QUE NOS INDICA EL FILTRO
+    if choice.upper()=="T":
+        opt = input("(A) Analógico (D) Digital (AD) Ambos: ")
+        #LEEMOS ARCHIVO Y BUSCAMOS SEGÚN PARÁMETRO OPT
+        file = open("relojes.txt",encoding="utf-8")
+        line = file.readline().strip()
+       
+        while line != "":
+            p = line.split(",")
+            posicion = int(p[0]) #QUEREMOS GUARDAR ESTO COMO UN ENTERO INMEDIATAMENTE
+            nombre = p[1]
+            precio = p[2]
+            tipo = p[3]
             
-        arch = open('relojes.txt', encoding= 'utf-8')
-        linea = arch.readline().strip()
-        
-        while linea != '':
-            partes = linea.split(',')
-            idReloj= partes[0]
-            nombreReloj = partes[1]
-            precio = int(partes[2])
-            tipoReloj = partes[3]
-            esSumergible = partes[4]
-            if sumergible == esSumergible:
-                print(idReloj,nombreReloj,precio)
-            linea = arch.readline().strip()
+            if (opt.upper() == "A" and tipo == "Analógico") or (opt.upper() == "D" and tipo == "Digital") or (opt.upper() == "AD" and tipo =="Analógico/Digital") :
+                print(f"   {posicion} {nombre} {precio}")
+                
+            line = file.readline().strip()
             
-        numRelojCompra = int(input('Ingrese numero de reloj a comprar: '))
-        arch = open('relojes.txt', encoding= 'utf-8')
-        linea = arch.readline().strip()
         
-        while linea != '':
-            partes = linea.split(',')
-            idReloj= partes[0]
-            nombreReloj = partes[1]
-            precio = int(partes[2])
-            tipoReloj = partes[3]
-            if esSumergible == sumergible and numRelojCompra==idReloj:
-                print(f'COMPRADO {idReloj} {nombreReloj} {precio}')
-            linea = arch.readline().strip()
+    if choice.upper()=="S":
+        opt = input("(S) Sumergible (N) No Sumergible: ")
+        #LEEMOS ARCHIVO Y BUSCAMOS SEGÚN PARÁMETRO OPT
+        file = open("relojes.txt",encoding="utf-8")
+        line = file.readline().strip()
+        
+        while line != "":
+            p = line.split(",")
+            posicion = int(p[0]) #QUEREMOS GUARDAR ESTO COMO UN ENTERO INMEDIATAMENTE
+            nombre = p[1]
+            precio = p[2]
+            sumergible = p[4]
+            
+            if (opt.upper() == "S" and sumergible == "Sí") or (opt.upper() == "N" and sumergible == "No"):
+                print(f"   {posicion} {nombre} {precio}")
+                
+            line = file.readline().strip()
+            
         
         
-    numeroReloj = int(input('Seleccione número de reloj a comprar: '))
+    #CUAL QUIERO COMPRAR, PREGUNTO
+    compra = int(input("Seleccione número de reloj a comprar: "))
     
+    file = open("relojes.txt",encoding="utf-8")
+    line = file.readline().strip()
+    while line != "":
+        
+        
+        p = line.split(",")
+        numero = int(p[0])
+        nombre = p[1]
+        precio = int(p[2])
+        
+        if numero == compra: # ya que las posiciones no se repiten, no es necesaria otra condicion
+            print(f"COMPRADO {numero} {nombre} {precio}")
+            total = total + precio 
+            break # se deja de leer el archivo
+        
+        line = file.readline().strip()
     
-print('Total recaudado: ')
+    print("-------Menú-------")
+    print("Elige un filtro o fin para terminar")
+    choice = input("(T) Tipo (S) Sumergible (FIN): ") # para que se reinicie el ciclo
+        
+print(f"Total recaudado: ${total}")
