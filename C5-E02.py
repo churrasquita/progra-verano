@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jan 13 17:06:55 2025
+Created on Mon Jan 13 20:38:59 2025
 
-@author: catal
+@author: cata
 """
-
-def entre (v1, v2, proceso):
-    if proceso == 'suma':
-        resultado = 0
-    elif proceso == 'multiplicacion':
-        resultado = 1
-    for i in range(v1, v2 +1):
-        if proceso == 'suma':
-            resultado += i
-        elif proceso == 'multiplicacion':
-            resultado *= i
-    return resultado
-
-print(entre(1, 3, "suma")) # retorna 6
-print(entre(3, 5, "suma")) # retorna 12
-print(entre(1, 2, "multiplicacion")) # retorna 2
-print(entre(5, 8, "multiplicacion")) 
+def esPrimo (num):
+    if num == 0 or num == 1:
+        return False
+    cont = 0
+    for i in range(1, num +1):
+        if num%i == 0:
+            cont += 1
+    if cont > 2:
+        return False
+    else:
+        return True
+    
+x = 0
+while x != -1:
+    x = int(input('Ingresa un número para ver si el número es primo!: '))
+    print(esPrimo(x))
