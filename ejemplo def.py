@@ -10,9 +10,23 @@ def esPrimo (num):
         return False
     for i in range(2, num): 
         if num % i == 0:
-            return False
+            return False # es decir, no es primo
     return True
     
+def impares(barCode):
+    impares = 0
+    pares = 0
+    for num in str(barCode):
+        if int(num)%2 != 0:
+            impares += 1 
+        else: 
+            pares += 1
+    if impares > pares:
+        return True
+    else:
+        return False
+            
+
 def expired(d,m,yyyy, a_d, a_m, a_y): # para calcular si el producto está caducado según fecha
 
     if yyyy < a_yyyy: # False: bueno (no caducado) True: caducado
@@ -29,7 +43,7 @@ arch = open('stock.txt', 'r', encoding= 'utf-8')
 line = arch.readline().strip()
 line = arch.readline().strip()
 
-a_d = 14
+a_d = 15
 a_m = 1
 a_yyyy = 2025
 
@@ -61,9 +75,29 @@ while line != '':
             nHighPrice = f'{brand} {product}' # concatenar, así no utilizamos otra variable
         if expired(dd,mm,yyyy, a_d, a_m, a_yyyy): # ya que si está malo retorna True, entonces se ejecuta la condicion
             contExpired += quantity
+            
+            if impares(barCode): # si es verdadero
+                percent = 0.5
+                if esPrimo(int(weight)): # si es verdadero, vamos cambiando el porc de descuento 
+                    percent = 0.8
+                if organic == 'true':
+                    percent = 0.2
+                    
+                print(f'{brand} {product} rebajó un {percent*100}% ($ {round((price*quantity*percent),2)}) ')
+            else:
+                print(f'{brand} {product} se regaló!')
+            
         total += quantity
     line = arch.readline().strip()
 
 expPercent = contExpired/total * 100
-print(f'1) {nHighPrice} es el producto con mayor precio (%{highPrice}) ')
+
+print('-'*20)
+print(f'1) {nHighPrice} es el producto con mayor precio (${highPrice}) ')
 print(f'2) {round(expPercent,2)}% de productos están caducados')
+# vender los productos caducados al sig valor:
+# si el valor entero de su peso es un numero primo: los venderemos al 80% de su valor
+# si son productos orgánicos los venderemos al 20% de su valor
+# si en el codigo de barra hay más numeros impares, se venderán a la mitad del precio, de lo contrario, se regalarán. 
+# el último punto aplica antes que los dos primeros. 
+    
