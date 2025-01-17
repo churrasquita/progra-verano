@@ -84,3 +84,22 @@ burbuja(modelosBaterias_, baterias_, False)
 print('4) Baterías que duran mucho más:')
 for i in range(len(baterias_)):
     print(f'{modelosBaterias_[i]} ({baterias_[i]} mAh)')
+
+
+# OTRA FORMA DE ENCUNTRAR LA FRECUENCIA 
+
+# arch = open('celulares.txt', 'r', encoding = 'utf-8')
+# linea = arch.readline().strip()
+
+# marcas = []
+# frecuencias = []
+# while linea != '': 
+#     partes = linea.split('-')
+#     marca = partes[0]
+#     if not marca in marcas:
+#         marcas.append(marca)
+#         frecuencias.append(1) # cuenta la marca que acaba de ingresar
+#     else:
+#         idx = marcas.index(marca) # me encuentra el índice de la marca
+#         frecuencias[idx] += 1
+#     linea = arch.readline().strip()
