@@ -112,6 +112,14 @@ print('Netflix: ')
 ordenar(tiemposN, rutsN)
 imprimir(rutsN, tiemposN)
 print('Amazon:')
+
+# arch = open('contratos.txt', encoding = 'utf-8')
+# linea = arch.readline().strip()
+# plataformas = []
+# frecuencias = []
+# tiempos = []
+# tiposCuentas = []
+
 ordenar(tiemposA, rutsA)
 imprimir(rutsA, tiemposA)
 print('HBO:')
